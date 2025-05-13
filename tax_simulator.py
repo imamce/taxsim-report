@@ -82,7 +82,7 @@ def main():
             })
 
     st.sidebar.button("사업장 추가", on_click=add_biz)
-    tax_paid = st.sidebar.number_input("납부하실 세금", key="tax_paid")  # ✅ 음수 입력 허용
+    tax_paid = st.sidebar.number_input("납부하실 세금", key="tax_paid")  # 음수 허용
     input_sum_of_others = st.sidebar.number_input("합계 (㉘+㉙+㉚)", min_value=0, key="manual_total")
     fee_surcharge = st.sidebar.number_input("수수료 할증(감면)", value=0, step=1000)
     extra_deduction_name = st.sidebar.text_input("추가 감면사항명")
@@ -97,8 +97,9 @@ def main():
     auto_fee = calculate_fee(total_income)
     final_fee = auto_fee + fee_surcharge
 
-    if os.path.exists("C:/Users/imamc/Desktop/taxsim/logo.jpg"):
-        img = Image.open("C:/Users/imamc/Desktop/taxsim/logo.jpg")
+    # ✅ 상대경로로 로고 불러오기 (Streamlit Cloud용)
+    if os.path.exists("logo.jpg"):
+        img = Image.open("logo.jpg")
         st.image(img, use_container_width=False, width=200)
 
     st.write(f"## {name}님 2024년 종합소득세 보고서")
